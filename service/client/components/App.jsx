@@ -11,8 +11,7 @@ export default class App extends Component {
             data: [],
             outfitData: []
         })
-        this.check = this.check.bind(this)
-        this.AddToOutfit = this.AddToOutfit.bind(this)
+        this.check = this.check.bind(this);
     }
     getdata() {
         var config = {
@@ -58,15 +57,18 @@ export default class App extends Component {
     componentDidMount() {
         this.getdata();
     }
-    AddToOutfit(event) {
-        var outfit = event.target.value;
-        this.state.data.push(outfit)
+
+    AddToOutfit = id => {
+      const data= this.state.data.find(item=>item.id===id)
+      this.setState({
+        outfitData :[...this.state.outfitData, data]
+      })
     }
     render() {
         return (
             <div>
                 {this.check()}
-                <Outfit />
+                <Outfit outfit={this.state.outfitData}/>
                 <ProdectDetails />
             </div>
         )
