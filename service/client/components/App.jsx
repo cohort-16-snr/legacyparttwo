@@ -9,47 +9,51 @@ export default class App extends Component {
         super(props);
         this.state = ({
             data: [],
-            outfitData:[]
+            outfitData: []
         })
-        this.check=this.check.bind(this)
-        this.AddToOutfit=this.AddToOutfit.bind(this)
+        this.check = this.check.bind(this)
+        this.AddToOutfit = this.AddToOutfit.bind(this)
     }
     getdata() {
         var config = {
             method: 'get',
             url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
-            headers: {
-                'Authorization': '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'
+            headers: { 
+              'Authorization': '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'
             }
-        };
-
-        axios(config)
-            .then((response) => {
-                this.setState({
-                    data: response.data
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-       .then()
+          };
+          
+          axios(config)
+          .then(response => {
+            this.setState({
+                data: response.data
+           })
+          })
+          .then(data =>{
+              console.log(data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
     }
-    check(){
-   if(this.state.data.length>0){
-       return  <Cards data={this.state.data} addOutfit={this.AddToOutfit}/>
-   }
+
+    check() { 
+        if (this.state.data.length > 0) {
+            return <Cards data={this.state.data} addOutfit={this.AddToOutfit} />
+        }
     }
     componentDidMount() {
-        this.getdata()
+        this.getdata();
     }
-    AddToOutfit(event){
-     var outfit = event.target.value;
-     this.state.data.push(outfit)
+    AddToOutfit(event) {
+        var outfit = event.target.value;
+        this.state.data.push(outfit)
     }
-    render() { 
-      return (
+    render() {
+        console.log(this.state.data)
+        return (
             <div>
-               {this.check()}
+                {this.check()}
                 <Outfit />
                 <ProdectDetails />
             </div>
