@@ -7,7 +7,7 @@ const Cards = (props) => (
   <div className="wrapper">
   {props.data.map((element,key)=>{
   return(
-  <div key={key}>
+    <div key={key}>
     <div >
       <div>
         <div className="shadow-md rounded-sm overflow-hidden item" style={{ width: '250px', height: '50vh' }}>

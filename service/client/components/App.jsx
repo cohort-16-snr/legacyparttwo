@@ -18,23 +18,36 @@ export default class App extends Component {
         var config = {
             method: 'get',
             url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
-            headers: { 
-              'Authorization': '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'
+            headers: {
+                'Authorization': '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'
             }
-          };
-          
-          axios(config)
-          .then(response => {
-            this.setState({
-                data: response.data
-           })
-          })
-          .then(data =>{
-              console.log(data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        };
+
+        axios(config)
+            .then(response => {
+                response.data.map(element => {
+                    var configuration = {
+                        method: 'get',
+                        url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/' + element.id + '/styles',
+                        headers: {
+                            'Authorization': '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'
+                        }
+                    };
+                    axios(configuration)
+                        .then(response=> {
+                            this.setState({
+                                data: response.data.results
+                            })
+                        })
+                        .catch(error=> {
+                            console.log(error);
+                        });
+                })
+            })
+         
+            .catch(error =>{
+                console.log(error);
+            })
     }
 
     check() { 
@@ -50,7 +63,6 @@ export default class App extends Component {
         this.state.data.push(outfit)
     }
     render() {
-        console.log(this.state.data)
         return (
             <div>
                 {this.check()}
