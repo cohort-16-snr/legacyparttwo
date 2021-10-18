@@ -1,23 +1,23 @@
 import React from "react";
 import '../index.css';
 import Stars from './Rating.jsx';
+import Cpmparison from './ProdectDetails.jsx'
 const Cards = (props) => (
   <div>
     <h6 style={{ fontStyle: 'oblique', color: 'gray',paddingLeft:'120px',marginBottom:'-70px'}}>RELATED PRODUCTS</h6>
-    <div className="wrapper">
+    <div className="wrapper relative">
   {props.data.map((element,key)=>{
   return(
     <div key={key}>
-      {console.log(element)}
     <div >
       <div>
-        <div className="shadow-md rounded-sm overflow-hidden item" style={{ width: '250px', height: '50vh' }}>
-          <div className="relative" onClick={() => props.addOutfit(element.style_id)}>
-            <svg className="absolute top-0 right-0" width="25" height="30" fill="currentColor">
+        <div className="shadow-md rounded-sm overflow-hidden item border border-gray-800" style={{ width: '250px', height: '50vh' }}>
+          <div className="relative" >
+            <svg className="absolute top-0 right-0" width="25" height="30" fill="currentColor"  onClick={() => props.addOutfit(element.style_id)}>
               <path d="M7.05 3.691c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.372 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.363-1.118L.98 9.483c-.784-.57-.381-1.81.587-1.81H5.03a1 1 0 00.95-.69L7.05 3.69z" />
             </svg>
             <div>
-              <img src={element.photos[0].url} className="" alt="" />
+              <img src={element.photos[0].url} width='250' height='60' style={{overflow:'hidden'}} alt="" />
             </div>
           </div>
           <div className="p-4">
@@ -37,6 +37,9 @@ const Cards = (props) => (
 )
   })}
  </div>
+ <div className="absolute bottom-0 right-0">
+            <Cpmparison/>
+              </div>
  </div>
 )
 export default Cards

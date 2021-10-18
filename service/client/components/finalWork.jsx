@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Cards from './Card.jsx';
 import '../index.css';
 import Outfit from './Outfit.jsx';
+import ProdectDetails from './ProdectDetails.jsx';
 import axios from 'axios'
-export default class App extends Component {
+export default class finalWork extends Component {
     constructor(props) {
         super(props);
         this.state = ({
@@ -17,7 +18,7 @@ export default class App extends Component {
             method: 'get',
             url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
             headers: {
-                'Authorization': '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'
+                'Authorization': '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'
             }
         };
 
@@ -28,7 +29,7 @@ export default class App extends Component {
                         method: 'get',
                         url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/' + element.id + '/styles',
                         headers: {
-                            'Authorization': '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'
+                            'Authorization': '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'
                         }
                     };
                     axios(configuration)
@@ -59,7 +60,8 @@ export default class App extends Component {
 
     AddToOutfit = id => {
       const datas= this.state.data.find((element)=>{
-         return element.style_id===id
+          element.style_id===id
+        console.log(element)
         })
       this.setState({
         outfitData :[...this.state.outfitData, datas]
@@ -69,19 +71,13 @@ export default class App extends Component {
         const outfit = this.state.outfitData.filter(item => item.style_id !== id);
         this.setState({ outfitData: outfit });
       };
-    //   displayDetails = _=>{
-    //       return(
-    //           `<div>
-
-    //           </div>`
-    //       )
-    //   }
     render() {
         return (
             <div>
-                {this.check()}
-                <Outfit outfit={this.state.outfitData} delete={this.deleteOutfiy}/>
-            </div>
+            {this.check()}
+            <Outfit outfit={this.state.outfitData} delete={this.deleteToFavorite}/>
+            <ProdectDetails />
+        </div>
         )
     }
 }
